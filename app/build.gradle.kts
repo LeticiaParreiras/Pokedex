@@ -5,17 +5,15 @@ plugins {
 android {
     namespace = "com.example.pokedex"
 
-    // Standard AGP syntax
     compileSdk = 36
 
-    // Correct way to enable ViewBinding
     buildFeatures {
         viewBinding = true
     }
 
     defaultConfig {
         applicationId = "com.example.pokedex"
-        minSdk = 34
+        minSdk = 31
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -33,7 +31,6 @@ android {
         }
     }
     compileOptions {
-        // Upgraded to Java 17 for modern AGP compatibility
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -52,4 +49,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    
+    // Biblioteca Coil para carregamento de imagens
+    implementation("io.coil-kt:coil:2.6.0")
 }

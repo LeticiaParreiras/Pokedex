@@ -20,6 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".TeamActivity"
+            android:exported="false"
+            android:label="@string/titulo_time" />
+        <activity
+            android:name=".PokemonDetailActivity"
+            android:exported="false"
+            android:label="Detalhes do Pokémon" />
     </application>
 
 </manifest>

@@ -5,13 +5,12 @@ import com.example.pokedex.PokemonApi
 
 
 class listPokemonModel {
-    suspend fun getPokemonList(): List<PokemonList> {
+    suspend fun getPokemonList(offset: Int = 0, limit: Int = 20): PokemonResponse? {
             return try{
-                val pokemonList = PokemonApi.service.getPokemonList()
-                return pokemonList.results
+                return PokemonApi.service.getPokemonList(offset = offset, limit = limit)
             } catch (e: Exception) {
                 e.printStackTrace()
-                emptyList()
+                null
             }
         }
     }

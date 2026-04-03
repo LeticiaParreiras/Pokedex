@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Pokedex</string>
+    <string name="titulo_pokedex">Pokédex</string>
+    <string name="btn_anterior">Anterior</string>
+    <string name="btn_proximo">Próximo</string>
+    <string name="label_pagina">Página %1$d de %2$d</string>
+    <string name="btn_ir">Ir</string>
+    <string name="hint_pagina">Pág</string>
+    <string name="btn_time">Time</string>
+    <string name="titulo_time">Meu Time Pokémon</string>
+    <string name="msg_time_vazio">Aqui você poderá ver os pokémons do seu time no futuro!</string>
+    <string name="meu_time_titulo">Meu Time Pokémon</string>
+    <string name="time_descricao">Seu time</string>
+    <string name="btn_voltar">Voltar</string>
 </resources>
