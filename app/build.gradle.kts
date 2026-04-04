@@ -52,4 +52,5 @@ dependencies {
     
     // Biblioteca Coil para carregamento de imagens
     implementation("io.coil-kt:coil:2.6.0")
+    implementation(libs.coil)
 }

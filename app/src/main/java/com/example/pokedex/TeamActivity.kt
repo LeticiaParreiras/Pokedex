@@ -1,8 +1,9 @@
 package com.example.pokedex
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.example.pokedex.databinding.ActivityTeamBinding
 
 class TeamActivity : AppCompatActivity() {
@@ -13,16 +14,15 @@ class TeamActivity : AppCompatActivity() {
         binding = ActivityTeamBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = getString(R.string.btn_time)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
-        setupUI()
-    }
-
-    private fun setupUI() {
-        binding.btnBack.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+        // Configura a Toolbar para voltar
+        binding.toolbar.setNavigationOnClickListener {
+            finish()
         }
     }
 }

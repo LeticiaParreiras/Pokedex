@@ -1,104 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <RelativeLayout
+    <!--Top bar-->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/topContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/txtTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="@string/titulo_pokedex"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/titulo_pokedex"
+            app:titleCentered="true" />
 
-        <Button
-            android:id="@+id/btnGoToTeam"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:text="@string/btn_time" />
-    </RelativeLayout>
-
-    <ListView
+    </com.google.android.material.appbar.AppBarLayout>
+    <!--Lista de Pokémons-->
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listPokemons"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:clipToPadding="false"
+        android:paddingBottom="16dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/paginationBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topContainer"
+        app:spanCount="2"
+        tools:listitem="@layout/item_pokemon" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/btnGoToTeam"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="8dp"
-        android:background="#F5F5F5">
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/btn_time"
+        app:icon="@android:drawable/ic_menu_myplaces"
+        app:layout_constraintBottom_toTopOf="@+id/paginationBar"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Barra de Paginação -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/paginationBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeWidth="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="8dp">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnPrevious"
+                style="@style/Widget.Material3.Button.TextButton.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btn_anterior" />
+                android:contentDescription="@string/btn_anterior"
+                app:icon="@android:drawable/ic_media_previous" />
 
             <TextView
                 android:id="@+id/txtPageNumber"
-                android:layout_width="wrap_content"
+                style="@style/TextAppearance.Material3.LabelLarge"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:text="@string/label_pagina"
-                tools:text="Página 1 de 52"
-                android:textSize="14sp" />
+                android:layout_weight="1"
+                android:gravity="center"
+                tools:text="Página 1 de 52" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnNext"
+                style="@style/Widget.Material3.Button.TextButton.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btn_proximo" />
+                android:contentDescription="@string/btn_proximo"
+                app:icon="@android:drawable/ic_media_next" />
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginTop="4dp">
+    </com.google.android.material.card.MaterialCardView>
 
-            <EditText
-                android:id="@+id/editGoToPage"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_pagina"
-                android:inputType="number"
-                android:textAlignment="center"
-                android:textSize="14sp"
-                android:autofillHints="none" />
-
-            <Button
-                android:id="@+id/btnGoToPage"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_ir" />
-        </LinearLayout>
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

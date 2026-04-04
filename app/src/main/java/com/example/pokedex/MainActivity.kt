@@ -2,8 +2,6 @@ package com.example.pokedex
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -22,19 +20,29 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
+        setupRecyclerView()
         setupUI()
         setupObservers()
         
         viewModel.fetchPokemonList()
     }
-
+    // Configura o RecyclerView com um adapter
+    private fun setupRecyclerView() {
+        binding.listPokemons.setHasFixedSize(true)
+    }
+// Configura os cliques dos botões de "Próximo" e "Anterior"
     private fun setupUI() {
+        binding.btnGoToTeam.setOnClickListener {
+            val intent = Intent(this, TeamActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.btnNext.setOnClickListener {
             viewModel.nextPage()
         }
@@ -43,66 +51,32 @@ class MainActivity : AppCompatActivity() {
             viewModel.previousPage()
         }
 
-        binding.btnGoToPage.setOnClickListener {
-            val pageStr = binding.editGoToPage.text.toString()
-            if (pageStr.isNotEmpty()) {
-                val page = pageStr.toInt()
-                val total = viewModel.totalPages.value ?: 1
-                if (page in 1..total) {
-                    viewModel.goToPage(page)
-                    binding.editGoToPage.text.clear()
-                } else {
-                    Toast.makeText(this, "Página inválida (1-$total)", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
-        binding.btnGoToTeam.setOnClickListener {
-            val intent = Intent(this, TeamActivity::class.java)
-            startActivity(intent)
-        }
-
-        // Listener para clique nos itens da lista
-        binding.listPokemons.setOnItemClickListener { _, _, position, _ ->
-            val pokemon = viewModel.pokemonList.value?.get(position)
-            pokemon?.let {
-                val id = it.url.split("/").filter { s -> s.isNotEmpty() }.last()
+    }
+// Configura os observadores do ViewModel
+    private fun setupObservers() {
+        // Observe o LiveData do ViewModel para ir a tela de detalhes do Pokémon
+        viewModel.pokemonList.observe(this) { listaDePokemons ->
+            val adapter = PokemonAdapter(listaDePokemons) { pokemon ->
+                // Lógica de clique simplificada e moderna
                 val intent = Intent(this, PokemonDetailActivity::class.java).apply {
-                    putExtra("POKEMON_NAME", it.name.replaceFirstChar { char -> char.uppercase() })
-                    putExtra("POKEMON_ID", id)
+                    putExtra("POKEMON_NAME", pokemon.name)
+                    putExtra("POKEMON_ID", pokemon.url.trimEnd('/').split('/').last())
                 }
                 startActivity(intent)
             }
+            binding.listPokemons.adapter = adapter // Atualiza o adapter
+            binding.listPokemons.scrollToPosition(0)// Scroll para a posição 0
         }
-    }
-
-    private fun setupObservers() {
-        viewModel.pokemonList.observe(this) { listaDePokemons ->
-            val itensFormatados = listaDePokemons.map { pokemon ->
-                val id = pokemon.url.split("/").filter { it.isNotEmpty() }.last()
-                val idFormatado = id.padStart(3, '0')
-                val nomeFormatado = pokemon.name.replaceFirstChar { it.uppercase() }
-                "$idFormatado - $nomeFormatado"
-            }
-            
-            val adapter = ArrayAdapter(
-                this,
-                android.R.layout.simple_list_item_1,
-                itensFormatados
-            )
-            binding.listPokemons.adapter = adapter
-            binding.listPokemons.setSelection(0)
-        }
-
+        // Observe o LiveData do ViewModel para atualizar a página atual e o total de páginas
         viewModel.currentPage.observe(this) { page ->
             updatePageInfo()
         }
-
+    // Observe o LiveData do ViewModel para atualizar a página atual e o total de páginas
         viewModel.totalPages.observe(this) { total ->
             updatePageInfo()
         }
     }
-
+// Atualiza a página atual e o total de páginas na interface do usuário
     private fun updatePageInfo() {
         val currentPage = viewModel.currentPage.value ?: 1
         val totalPages = viewModel.totalPages.value ?: 1

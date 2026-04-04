@@ -2,6 +2,8 @@ package com.example.pokedex
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import coil.load
 import com.example.pokedex.databinding.ActivityPokemonDetailBinding
 
@@ -12,6 +14,12 @@ class PokemonDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPokemonDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         val pokemonName = intent.getStringExtra("POKEMON_NAME") ?: "Unknown"
         val pokemonId = intent.getStringExtra("POKEMON_ID") ?: "1"
@@ -26,16 +34,9 @@ class PokemonDetailActivity : AppCompatActivity() {
             error(android.R.drawable.ic_menu_close_clear_cancel)
         }
 
-        binding.btnBackDetail.setOnClickListener {
+        // Configura a Toolbar para voltar
+        binding.toolbar.setNavigationOnClickListener {
             finish()
         }
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Detalhes"
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return true
     }
 }
