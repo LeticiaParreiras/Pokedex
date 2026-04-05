@@ -10,16 +10,27 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.pokedex.databinding.ActivityMainBinding
 import com.example.pokedex.modelView.pokemonListModelView
 
+/**
+ * Tela Principal da Pokédex.
+ * Responsável por exibir a lista de Pokémons, gerenciar a paginação e a navegação.
+ */
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    
+    // Injeção do ViewModel que gerencia os dados da lista
     private val viewModel: pokemonListModelView by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Ativa o design de tela cheia (Edge-to-Edge)
         enableEdgeToEdge()
+        
+        // Configuração do ViewBinding para acessar os elementos do XML
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
+        // Ajusta o padding da view principal para não ficar atrás das barras do sistema
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -30,60 +41,65 @@ class MainActivity : AppCompatActivity() {
         setupUI()
         setupObservers()
         
+        // Carrega a primeira lista de Pokémons ao iniciar
         viewModel.fetchPokemonList()
     }
-    // Configura o RecyclerView com um adapter
+
+    // Configurações básicas do RecyclerView
     private fun setupRecyclerView() {
         binding.listPokemons.setHasFixedSize(true)
     }
-// Configura os cliques dos botões de "Próximo" e "Anterior"
+
+    // Configura os ouvintes de clique nos botões da interface
     private fun setupUI() {
+        // Navegação para a tela de Time (Meu Time)
         binding.btnGoToTeam.setOnClickListener {
             val intent = Intent(this, TeamActivity::class.java)
             startActivity(intent)
         }
 
+        // Navegação para a próxima página de Pokémons
         binding.btnNext.setOnClickListener {
             viewModel.nextPage()
         }
 
+        // Navegação para a página anterior
         binding.btnPrevious.setOnClickListener {
             viewModel.previousPage()
         }
-//    Campo de busca desabilitado - funcionalidade será completada na Etapa 2
-        binding.editSearch.isEnabled = false
-        binding.editSearch.hint = getString(R.string.hint_buscar)
     }
-// Configura os observadores do ViewModel
+
+    // Configura os observadores de LiveData do ViewModel
     private fun setupObservers() {
-        // Observe o LiveData do ViewModel para ir a tela de detalhes do Pokémon
+        // Observa mudanças na lista de Pokémons (quando a API responde)
         viewModel.pokemonList.observe(this) { listaDePokemons ->
+            // Cria o adapter passando a lista e a função de clique
             val adapter = PokemonAdapter(listaDePokemons) { pokemon ->
-                // Lógica de clique simplificada e moderna
+                // Ao clicar em um Pokémon, abre a tela de detalhes via Intent
                 val intent = Intent(this, PokemonDetailActivity::class.java).apply {
-                    putExtra("POKEMON_NAME", pokemon.name)
+                    putExtra("POKEMON_NAME", pokemon.name.replaceFirstChar { it.uppercase() })
+                    // Extrai o ID da URL para buscar a imagem na outra tela
                     putExtra("POKEMON_ID", pokemon.url.trimEnd('/').split('/').last())
                 }
                 startActivity(intent)
             }
-            binding.listPokemons.adapter = adapter // Atualiza o adapter
-            binding.listPokemons.scrollToPosition(0)// Scroll para a posição 0
+            binding.listPokemons.adapter = adapter
+            binding.listPokemons.scrollToPosition(0) // Volta para o topo ao trocar de página
         }
-        // Observe o LiveData do ViewModel para atualizar a página atual e o total de páginas
-        viewModel.currentPage.observe(this) { page ->
-            updatePageInfo()
-        }
-    // Observe o LiveData do ViewModel para atualizar a página atual e o total de páginas
-        viewModel.totalPages.observe(this) { total ->
-            updatePageInfo()
-        }
+
+        // Observa a página atual e o total de páginas para atualizar o rodapé
+        viewModel.currentPage.observe(this) { updatePageInfo() }
+        viewModel.totalPages.observe(this) { updatePageInfo() }
     }
-// Atualiza a página atual e o total de páginas na interface do usuário
+
+    // Atualiza o texto da paginação e habilita/desabilita os botões de navegação
     private fun updatePageInfo() {
         val currentPage = viewModel.currentPage.value ?: 1
         val totalPages = viewModel.totalPages.value ?: 1
         
         binding.txtPageNumber.text = getString(R.string.label_pagina, currentPage, totalPages)
+        
+        // Regras de negócio da paginação:
         binding.btnPrevious.isEnabled = currentPage > 1
         binding.btnNext.isEnabled = currentPage < totalPages
     }

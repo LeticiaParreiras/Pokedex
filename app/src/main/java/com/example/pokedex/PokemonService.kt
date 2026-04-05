@@ -7,18 +7,21 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+// Interface que define os endpoints da PokeAPI utilizando Retrofit
 interface PokemonService {
     @GET("pokemon")
     suspend fun getPokemonList(
-        @Query("limit") limit: Int = 20,
-        @Query("offset") offset: Int = 0
+        @Query("limit") limit: Int = 20, // Define quantos pokémons buscar por vez
+        @Query("offset") offset: Int = 0 // Define a partir de qual posição começar a busca (para paginação)
     ): PokemonResponse
 }
+
 object PokemonApi{
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://pokeapi.co/api/v2/")
-        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl("https://pokeapi.co/api/v2/") // URL base da API
+        .addConverterFactory(GsonConverterFactory.create()) // Converte o JSON da resposta para objetos Kotlin (GSON)
         .build()
-    val service: PokemonService = retrofit.create(PokemonService::class.java)
 
+    // Serviço que será usado para fazer as chamadas de rede
+    val service: PokemonService = retrofit.create(PokemonService::class.java)
 }
