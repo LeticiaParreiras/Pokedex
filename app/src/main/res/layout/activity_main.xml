@@ -28,7 +28,7 @@
     <!--Campo de busca (funcionalidade será completada na Etapa 2)-->
     <EditText
         android:id="@+id/editSearch"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:hint="@string/hint_buscar"
@@ -36,7 +36,9 @@
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topContainer"/>
+        app:layout_constraintTop_toBottomOf="@+id/topContainer"
+        android:background="@drawable/custom_edittext_bg"
+        />
 
 
     <!--Lista de Pokémons-->
@@ -50,7 +52,7 @@
         app:layout_constraintBottom_toTopOf="@+id/paginationBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topContainer"
+        app:layout_constraintTop_toBottomOf="@+id/editSearch"
         app:spanCount="2"
         tools:listitem="@layout/item_pokemon" />
 
@@ -63,7 +65,9 @@
         android:text="@string/btn_time"
         app:icon="@android:drawable/ic_menu_myplaces"
         app:layout_constraintBottom_toTopOf="@+id/paginationBar"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:iconTint="@color/material_dynamic_primary10"
+        />
 
     <!-- Barra de Paginação -->
     <com.google.android.material.card.MaterialCardView
@@ -91,7 +95,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/btn_anterior"
-                app:icon="@android:drawable/ic_media_previous" />
+                app:icon="@android:drawable/ic_media_previous"
+                app:iconTint="@color/material_dynamic_primary10"
+                />
 
             <TextView
                 android:id="@+id/txtPageNumber"
@@ -108,7 +114,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/btn_proximo"
-                app:icon="@android:drawable/ic_media_next" />
+                app:icon="@android:drawable/ic_media_next"
+                app:iconTint="@color/material_dynamic_primary10"
+                />
 
         </LinearLayout>
 
