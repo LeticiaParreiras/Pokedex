@@ -23,15 +23,14 @@ Este projeto é uma aplicação mobile inspirada na franquia Pokémon, desenvolv
 
 O projeto foi construído seguindo as melhores práticas de desenvolvimento Android moderno:
 
-* **Linguagem:** [Kotlin](https://kotlinlang.org/)
+* **Linguagem:** Kotlin
 * **Arquitetura:** **MVVM** (Model-View-ViewModel) para separação de responsabilidades.
 * **UI/UX:**
     * **Material Design 3:** Componentes e temas consistentes.
-    * **RecyclerView + GridLayoutManager:** Listagem performática em grade.
-    * **ViewBinding:** Substituição segura e moderna ao `findViewById`.
+    * **RecyclerView** Listagem performática em grade.
 * **Networking:**
     * Consumo da **PokéAPI**.
-    * Comunicação assíncrona para garantir uma interface sem travamentos (Non-blocking UI).
+    * Comunicação assíncrona para garantir uma interface sem travamentos.
 
 ---
 
@@ -56,7 +55,7 @@ O projeto foi construído seguindo as melhores práticas de desenvolvimento Andr
 
 ## Equipe
 
-IGOR PRADO SUDO
-LETÍCIA XIMENES PARREIRAS
-MARIANA URANI BARROS
+- IGOR PRADO SUDO
+- LETÍCIA XIMENES PARREIRAS
+- MARIANA URANI BARROS
 
