@@ -59,8 +59,4 @@ O projeto foi construído seguindo as melhores práticas de desenvolvimento Andr
 IGOR PRADO SUDO
 LETÍCIA XIMENES PARREIRAS
 MARIANA URANI BARROS
----
 
-### **Dica de Personalização:**
-> Se você já tiver prints do app rodando, você pode criar uma pasta chamada `screenshots` no seu repositório e adicionar uma linha como esta no README:
-> `![Home do App](./screenshots/home.png)`
