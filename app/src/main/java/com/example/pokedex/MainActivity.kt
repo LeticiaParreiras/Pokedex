@@ -50,7 +50,9 @@ class MainActivity : AppCompatActivity() {
         binding.btnPrevious.setOnClickListener {
             viewModel.previousPage()
         }
-
+//    Campo de busca desabilitado - funcionalidade será completada na Etapa 2
+        binding.editSearch.isEnabled = false
+        binding.editSearch.hint = getString(R.string.hint_buscar)
     }
 // Configura os observadores do ViewModel
     private fun setupObservers() {

@@ -1,27 +1,32 @@
 package com.example.pokedex
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.pokedex.databinding.ActivityTeamBinding
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.MaterialToolbar
 
 class TeamActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityTeamBinding
+    private lateinit var toolbar: MaterialToolbar
+    private lateinit var  txtTeamMessage: TextView
+    private lateinit var listTeam: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityTeamBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_team)
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
+        toolbar = findViewById(R.id.toolbar)
+        txtTeamMessage = findViewById(R.id.txtTeamMessage)
+        listTeam = findViewById(R.id.listTeam)
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) {v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        // Configura a Toolbar para voltar
-        binding.toolbar.setNavigationOnClickListener {
+        toolbar.setNavigationOnClickListener {
             finish()
         }
     }

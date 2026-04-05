@@ -24,6 +24,21 @@
             app:titleCentered="true" />
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <!--Campo de busca (funcionalidade será completada na Etapa 2)-->
+    <EditText
+        android:id="@+id/editSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:hint="@string/hint_buscar"
+        android:inputType="text"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topContainer"/>
+
+
     <!--Lista de Pokémons-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listPokemons"

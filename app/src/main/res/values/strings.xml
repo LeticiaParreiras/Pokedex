@@ -12,4 +12,5 @@
     <string name="meu_time_titulo">Meu Time Pokémon</string>
     <string name="time_descricao">Seu time</string>
     <string name="btn_voltar">Voltar</string>
+    <string name="hint_buscar">Buscar Pokémon...</string>
 </resources>

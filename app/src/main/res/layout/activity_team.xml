@@ -21,7 +21,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
+<!--    Mensagem exibida quando o time está vazio -->
     <TextView
         android:id="@+id/txtTeamMessage"
         style="@style/TextAppearance.Material3.BodyLarge"
@@ -30,8 +30,15 @@
         android:layout_gravity="center"
         android:layout_margin="24dp"
         android:gravity="center"
-        android:text="@string/msg_time_vazio" />
+        android:text="@string/msg_time_vazio"
+        android:visibility="visible"/>
 
-
+<!-- Lista do time (ficará visível na Etapa 2) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listTeam"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone"/>
 
 </LinearLayout>
