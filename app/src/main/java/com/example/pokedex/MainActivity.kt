@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.pokedex.databinding.ActivityMainBinding
-import com.example.pokedex.modelView.pokemonListModelView
+import com.example.pokedex.modelView.PokemonListModelView
 
 /**
  * Tela Principal da Pokédex.
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     
     // Injeção do ViewModel que gerencia os dados da lista
-    private val viewModel: pokemonListModelView by viewModels()
+    private val viewModel: PokemonListModelView by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

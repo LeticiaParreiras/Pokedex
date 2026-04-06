@@ -8,7 +8,7 @@ import com.example.pokedex.model.PokemonList
 import com.example.pokedex.model.listPokemonModel
 import kotlinx.coroutines.launch
 
-class pokemonListModelView: ViewModel() {
+class PokemonListModelView: ViewModel() {
     private val pokemonListModel = listPokemonModel()
     
     private val _pokemonList = MutableLiveData<List<PokemonList>>()
