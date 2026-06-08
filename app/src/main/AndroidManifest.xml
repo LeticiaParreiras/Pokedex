@@ -25,6 +25,10 @@
             android:exported="false"
             android:label="@string/titulo_time" />
         <activity
+            android:name=".RandomPokemonActivity"
+            android:exported="false"
+            android:label="@string/menu_random_pokemon" />
+        <activity
             android:name=".PokemonDetailActivity"
             android:exported="false"
             android:label="Detalhes do Pokémon" />

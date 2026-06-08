@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RandomPokemonActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/topContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/abc_ic_ab_back_material"
+            app:title="@string/menu_random_pokemon"
+            app:titleCentered="true" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/txtInstructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/shake_to_open"
+        android:textAlignment="center"
+        style="@style/TextAppearance.Material3.TitleMedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topContainer" />
+
+    <!-- Pokébola -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/imgPokeball"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:cardCornerRadius="100dp"
+        app:cardElevation="8dp"
+        app:strokeWidth="8dp"
+        app:strokeColor="@android:color/black"
+        android:clipToOutline="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtInstructions">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Metade Superior (Vermelha) -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@android:color/holo_red_light" />
+
+            <!-- Metade Inferior (Branca) -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/white" />
+
+            <!-- Linha do Meio -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_centerInParent="true"
+                android:background="@android:color/black" />
+
+            <!-- Botão Central -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                app:cardCornerRadius="30dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:strokeWidth="6dp"
+                app:strokeColor="@android:color/black">
+
+                <View
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:background="@android:color/darker_gray"
+                    android:alpha="0.3" />
+            </com.google.android.material.card.MaterialCardView>
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:id="@+id/resultContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topContainer"
+        tools:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pokemon_reveal_title"
+            style="@style/TextAppearance.Material3.HeadlineSmall" />
+
+        <ImageView
+            android:id="@+id/imgRevealedPokemon"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/txtRevealedName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            style="@style/TextAppearance.Material3.HeadlineLarge"
+            tools:text="Pikachu" />
+
+        <Button
+            android:id="@+id/btnTryAgain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Tentar Novamente" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

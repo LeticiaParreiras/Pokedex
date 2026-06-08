@@ -6,4 +6,11 @@
     </style>
 
     <style name="Theme.Pokedex" parent="Base.Theme.Pokedex" />
+
+    <style name="ShapeAppearance.PokeballTop" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSizeTopLeft">100dp</item>
+        <item name="cornerSizeTopRight">100dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
 </resources>

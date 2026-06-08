@@ -13,4 +13,8 @@
     <string name="time_descricao">Seu time</string>
     <string name="btn_voltar">Voltar</string>
     <string name="hint_buscar">Buscar Pokémon...</string>
+    <string name="menu_random_pokemon">Pokémon Aleatório</string>
+    <string name="menu_team">Meu Time</string>
+    <string name="shake_to_open">Sacuda o telefone para abrir a pokébola!</string>
+    <string name="pokemon_reveal_title">Seu Pokémon Aleatório:</string>
 </resources>
