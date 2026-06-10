@@ -8,7 +8,7 @@
     <string name="hint_pagina">Pág</string>
     <string name="btn_time">Time</string>
     <string name="titulo_time">Meu Time Pokémon</string>
-    <string name="msg_time_vazio">Aqui você poderá ver os pokémons do seu time no futuro!</string>
+    <string name="msg_time_vazio">Seu time está vazio. Adicione alguns Pokémons!</string>
     <string name="meu_time_titulo">Meu Time Pokémon</string>
     <string name="time_descricao">Seu time</string>
     <string name="btn_voltar">Voltar</string>
@@ -17,4 +17,7 @@
     <string name="menu_team">Meu Time</string>
     <string name="shake_to_open">Sacuda o telefone para abrir a pokébola!</string>
     <string name="pokemon_reveal_title">Seu Pokémon Aleatório:</string>
+    <string name="AddEquipe">Adicionar a equipe</string>
+    <string name="remover">Remover</string>
+    <string name="pokemon_imagem">Imagem do Pokémon</string>
 </resources>
