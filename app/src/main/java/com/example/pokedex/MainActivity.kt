@@ -52,28 +52,29 @@ class MainActivity : AppCompatActivity() {
 
     // Configura os ouvintes de clique nos botões da interface
     private fun setupUI() {
-        // Configura o menu da toolbar
-        binding.toolbar.inflateMenu(R.menu.main_menu)
-        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+        // Configura a Barra de Navegação Inferior
+        binding.bottomNavigation.selectedItemId = R.id.nav_pokedex
+        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.menu_random_pokemon -> {
-                    val intent = Intent(this, RandomPokemonActivity::class.java)
-                    startActivity(intent)
+                R.id.nav_pokedex -> {
+                    // Já estamos na Pokédex, podemos rolar para o topo
+                    binding.listPokemons.smoothScrollToPosition(0)
                     true
                 }
-                R.id.menu_team -> {
-                    val intent = Intent(this, TeamActivity::class.java)
-                    startActivity(intent)
-                    true
+                R.id.nav_random -> {
+                    startActivity(Intent(this, RandomPokemonActivity::class.java))
+                    false // Retorna false para não mudar visualmente o item selecionado aqui, pois abre outra tela
+                }
+                R.id.nav_team -> {
+                    startActivity(Intent(this, TeamActivity::class.java))
+                    false
+                }
+                R.id.nav_map -> {
+                    startActivity(Intent(this, MapActivity::class.java))
+                    false
                 }
                 else -> false
             }
-        }
-
-        // Navegação para a tela de Time (Meu Time)
-        binding.btnGoToTeam.setOnClickListener {
-            val intent = Intent(this, TeamActivity::class.java)
-            startActivity(intent)
         }
 
         // Navegação para a próxima página de Pokémons

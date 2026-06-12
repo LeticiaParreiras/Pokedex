@@ -9,4 +9,8 @@
         android:id="@+id/menu_team"
         android:title="@string/menu_team"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_map"
+        android:title="@string/menu_map"
+        app:showAsAction="never" />
 </menu>
