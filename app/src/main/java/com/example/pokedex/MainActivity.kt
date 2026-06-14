@@ -2,6 +2,7 @@ package com.example.pokedex
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -86,6 +87,24 @@ class MainActivity : AppCompatActivity() {
         binding.btnPrevious.setOnClickListener {
             viewModel.previousPage()
         }
+
+        binding.btnSearch.setOnClickListener {
+            performSearch()
+        }
+
+        binding.editSearch.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                performSearch()
+                true
+            } else {
+                false
+            }
+        }
+    }
+    private fun performSearch() {
+        val query = binding.editSearch.text.toString().trim()
+            viewModel.searchPokemon(query)
+
     }
 
     // Configura os observadores de LiveData do ViewModel

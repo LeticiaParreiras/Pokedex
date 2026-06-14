@@ -14,6 +14,8 @@ class PokemonListModelView: ViewModel() {
     private val _pokemonList = MutableLiveData<List<PokemonList>>()
     val pokemonList: LiveData<List<PokemonList>> = _pokemonList
 
+    private var allPokemonCache: List<PokemonList> = emptyList()
+
     private var currentOffset = 0
     private val limit = 20
     private val maxPokemon = 1025
@@ -73,6 +75,32 @@ class PokemonListModelView: ViewModel() {
             currentOffset = (page - 1) * limit
             _currentPage.value = page
             fetchPokemonList()
+        }
+    }
+    fun searchPokemon(query: String) {
+        if (query.isEmpty()) {
+            fetchPokemonList() // Volta para a lista paginada se a busca estiver vazia
+            return
+        }
+
+        viewModelScope.launch {
+            try {
+                // Se o cache estiver vazio, carrega todos os pokémons uma vez
+                if (allPokemonCache.isEmpty()) {
+                    val response = pokemonListModel.getPokemonList(offset = 0, limit = maxPokemon)
+                    allPokemonCache = response?.results ?: emptyList()
+                }
+
+                // Filtra a lista localmente
+                val filtered = allPokemonCache.filter {
+                    it.name.contains(query, ignoreCase = true)
+                }
+
+                _pokemonList.value = filtered
+                _currentPage.value = 1
+                _totalPages.value = 1 // Na busca, ignoramos a paginação
+            } catch (e: Exception) {
+            }
         }
     }
 }

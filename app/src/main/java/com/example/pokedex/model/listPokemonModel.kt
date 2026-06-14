@@ -15,6 +15,7 @@ class listPokemonModel {
                 null // Retorna null em caso de erro na rede ou na conversão
             }
         }
+
     }
 
 // Data Class que representa a estrutura completa da resposta da PokeAPI
