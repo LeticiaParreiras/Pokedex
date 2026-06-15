@@ -32,6 +32,22 @@ O projeto foi construído seguindo as melhores práticas de desenvolvimento Andr
     * Consumo da **PokéAPI**.
     * Comunicação assíncrona para garantir uma interface sem travamentos.
 
+## 🧪 Testes
+
+O projeto conta com testes unitários implementados com **JUnit 4**, **Mockito-Kotlin** e **Turbine**, cobrindo as camadas de dados e ViewModel:
+
+- **EquipeRepositoryTest** — Valida que o repositório delega corretamente as operações ao DAO (inserir, deletar, buscar, contar e expor o Flow).
+- **EquipeViewModelTest** — Verifica as regras de negócio da equipe: bloqueio de duplicatas, limite de 6 Pokémons e emissão de mensagens de feedback via `SharedFlow`.
+- **PokemonListModelViewTest** — Testa paginação, filtragem de Pokémons por nome (case-insensitive) e cálculo correto do total de páginas.
+
+Para executar os testes, use o comando:
+
+```
+./gradlew test
+```
+
+Ou pelo Android Studio, clique com o botão direito no arquivo de teste e selecione "Run".
+
 ---
 
 ## 📂 Estrutura do Projeto

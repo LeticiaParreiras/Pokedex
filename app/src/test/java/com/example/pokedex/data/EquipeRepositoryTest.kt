@@ -50,7 +50,7 @@ class EquipeRepositoryTest {
 
     @Test
     fun `inserir deve delegar a chamada ao DAO` () = runTest {
-        val equipe = Equipe().apply { nomePokemon = "Bullbasaur"; idPokemon = 1 }
+        val equipe = Equipe().apply { nomePokemon = "Bulbasaur"; idPokemon = 1 }
         repository.inserir(equipe)
         verify(equipeDao).insert(equipe)
     }
