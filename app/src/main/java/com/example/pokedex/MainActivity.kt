@@ -70,6 +70,10 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this, TeamActivity::class.java))
                     false
                 }
+                R.id.nav_history -> {
+                    startActivity(Intent(this, HistoryActivity::class.java))
+                    false
+                }
                 R.id.nav_map -> {
                     startActivity(Intent(this, MapActivity::class.java))
                     false

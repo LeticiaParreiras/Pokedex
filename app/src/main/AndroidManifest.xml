@@ -36,6 +36,10 @@
             android:name=".PokemonDetailActivity"
             android:exported="false"
             android:label="Detalhes do Pokémon" />
+        <activity
+            android:name=".HistoryActivity"
+            android:exported="false"
+            android:label="@string/titulo_history" />
     </application>
 
 </manifest>

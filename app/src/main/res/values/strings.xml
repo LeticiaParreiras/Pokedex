@@ -20,6 +20,9 @@
     <string name="AddEquipe">Adicionar a equipe</string>
     <string name="remover">Remover</string>
     <string name="pokemon_imagem">Imagem do Pokémon</string>
+    <string name="menu_history">Histórico</string>
+    <string name="titulo_history">Vistos Recentemente</string>
+    <string name="msg_history_vazio">Você ainda não visitou nenhum Pokémon.</string>
     <string name="menu_map">Mapa</string>
     <string name="map_title">Encontre locais que vendem produtos Pokémon perto de você!</string>
 </resources>

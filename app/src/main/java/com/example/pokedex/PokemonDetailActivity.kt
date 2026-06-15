@@ -15,6 +15,7 @@ import coil.load
 import com.example.pokedex.data.AppDatabase
 import com.example.pokedex.data.Equipe
 import com.example.pokedex.data.EquipeRepository
+import com.example.pokedex.data.HistoryPreferences
 import com.example.pokedex.databinding.ActivityPokemonDetailBinding
 import kotlinx.coroutines.launch
 
@@ -40,6 +41,10 @@ class PokemonDetailActivity : AppCompatActivity() {
 
          pokemonName = intent.getStringExtra("POKEMON_NAME") ?: "Unknown"
          pokemonId = intent.getStringExtra("POKEMON_ID") ?: "1"
+
+        // Salva no histórico (ID e Nome)
+        val historyPrefs = HistoryPreferences(this)
+        historyPrefs.addVisit(pokemonId, pokemonName)
 
         binding.txtPokemonName.text = pokemonName
         
